@@ -1,0 +1,14 @@
+path: C:/Users/User/PycharmProjects/deepLP/ultralytics/custom_train  # 최상위 경로
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 1
+names: ['eye']
+
+roboflow:
+  workspace: tukou
+  project: dog-eye
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/tukou/dog-eye/dataset/1
