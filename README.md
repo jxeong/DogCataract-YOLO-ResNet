@@ -2,27 +2,23 @@
 YOLOv8 + ResNet-18 두 모델을 사용한 반려견 백내장 진단 딥러닝 모델 개발 기말 프로젝트
 
 
-## 🖥️ 프로젝트 소개
-본 프로젝트는 YOLOv8으로 반려견 눈 영역을 검출하고, ResNet-18로 백내장 진행 단계를 ‘정상-초기-비성숙-성숙’으로 분류하는 딥러닝 시스템을 개발하였다. 각각의 모델은 강아지 얼굴 데이터셋과 백내장 데이터셋을 사용해 별도로 학습되었다.
+## 🐶 프로젝트 소개
+- 본 프로젝트는 YOLOv8으로 반려견 눈 영역을 검출하고, ResNet-18로 백내장 진행 단계를 ‘정상-초기-비성숙-성숙’으로 분류하는 딥러닝 시스템을 개발하였다.
+- 각각의 모델은 강아지 얼굴 데이터셋과 백내장 데이터셋을 사용해 별도로 학습되었다.
 <br>
 
 ### ⚙️ 개발 환경
-- `Java 8`
-- `JDK 1.8.0`
-- **IDE** : STS 3.9
-- **Framework** : Springboot(2.x)
-- **Database** : Oracle DB(11xe)
-- **ORM** : Mybatis
+- GPU: `NVIDIA GeForce RTX 3060 Ti`
+- `Pycharm` 가상환경
 
 ### 📌 데이터셋 다운로드, 폴더 위치
 - [YOLO] 강아지 얼굴 - 눈 데이터셋(이미지, 라벨링) -<a href="https://drive.google.com/file/d/1Kpyr5NNtKyTtM7oFbv-JW4uux3fkFRy4/view?usp=sharing" > 구글드라이브 이동</a>
-- YOLO 데이터셋 파일 경로: `ultralytics/custom_train`
+     - YOLO 데이터셋 파일 경로: `ultralytics/custom_train`
 
 - [ResNet] 반려견 백내장 진행 단계 데이터셋(이미지) -<a href="https://drive.google.com/file/d/16yyHc9qtFL8t1XJTO6o2_pUhwn8J6wNV/view?usp=sharing" > 구글드라이브 이동</a>
-- ResNet 데이터셋 파일 경로: `eye/eye_data`
+     - ResNet 데이터셋 파일 경로: `eye/eye_data`
 
-### 📌 프로젝트 구조
-
+### 📁 프로젝트 구조
 ```
 ├── README.md
 ├── requirements.txt
@@ -55,16 +51,19 @@ YOLOv8 + ResNet-18 두 모델을 사용한 반려견 백내장 진단 딥러닝 
      │     │    ├── images
      │     │    └── labels
      │     ├── valid
+     │     │    ├── images
+     │     │    └── labels
      │     └── test
+     │          ├── images
+     │          └── labels
      │          .
      │          .
      │          .
 ```
 
-
-
-## 📌 주요 기능
-#### 로그인 - <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(Login)" >상세보기 - WIKI 이동</a>
-- DB값 검증
-- ID찾기, PW찾기
-- 로그인 시 쿠키(Cookie) 및 세션(Session) 생성
+## 📌 실행 방법
+### YOLOv5 학습, 실행 코드
+- `/ultralytics` 폴더에서 터미널로 실행
+- 학습: `yolo train cfg=custom_train/custom_train_cfg.yaml device=0`
+- 테스트: `yolo val model=runs/detect/train4/weights/best.pt data=custom_train/custom_dataset.yaml split=test iou=0.5`
+- 새로 학습한 가중치로 테스트 하고 싶을 경우, 테스트 코드의 `train{number}` 변경해야 함
